@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/books',function(){
+  return 'Here are all the books...';
+});
+
+Route::get('/books/{category}',function($category){
+  return 'Here are all the books in the category of '.$category;
+});
+
+Route::get('/practice', function() {
+
+    echo 'Hello World!<br/>';
+    echo 'Your environment is: '.App::environment();
+
+});
