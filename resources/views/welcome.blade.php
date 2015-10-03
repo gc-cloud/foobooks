@@ -38,7 +38,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">FooBooks App</div>
+                <p> Track and manage your collection of books!</p>.
+                {!!HTML::link('http://test.com')!!}
             </div>
         </div>
     </body>

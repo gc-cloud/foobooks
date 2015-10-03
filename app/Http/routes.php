@@ -15,17 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books',function(){
-  return 'Here are all the books...';
-});
+Route::get('/books','BookController@getIndex');
 
-Route::get('/books/{category}',function($category){
-  return 'Here are all the books in the category of '.$category;
-});
+Route::get('/books/show/{title}','BookController@getShow');
 
-Route::get('/practice', function() {
+Route::get('books/create','BookController@getCreate');
 
-    echo 'Hello World!<br/>';
-    echo 'Your environment is: '.App::environment();
-
-});
+Route::post('books/create','BookController@postCreate');
