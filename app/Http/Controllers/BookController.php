@@ -14,30 +14,31 @@ class BookController extends Controller
     */
     public function getIndex()
     {
-        return ' Here are all the books';
+        return view('books.index');
+        //return ' Here are all the books';
     }
 
     /**
     * Respond to foobooks getShow
-    */
-    public function getShow($title)
-    {
-        return 'Show book: ' . $title;
-    }
+     */
+    // public function getShow($title)
+    // {
+    //     return 'Show book: ' . $title;
+    // }
 
+    /**
+     * Responds to requests to GET /books/show/{id}
+     */
+    public function getShow($title= null) {
+        return view('books.show')->with('title', $title);
+    }
 
     /**
     * Responde to requests to create books
     */
     public function getCreate()
     {
-        echo 'Start  the creation of  a new book';
-        $pageHtml = '<form method="POST" action="/books/create">';
-        $pageHtml.= csrf_field(); // provide token
-        $pageHtml .= '<input type ="text" name = "title">';
-        $pageHtml .='<input type="submit">';
-        $pageHtml .='</form>';
-        return $pageHtml;
+        return view('books.create');
     }
 
 

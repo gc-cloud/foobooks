@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/books','BookController@getIndex');
 
-Route::get('/books/show/{title}','BookController@getShow');
+Route::get('/books/show/{title?}','BookController@getShow');
 
 Route::get('books/create','BookController@getCreate');
 
