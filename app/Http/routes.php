@@ -22,3 +22,25 @@ Route::get('/books/show/{title}','BookController@getShow');
 Route::get('books/create','BookController@getCreate');
 
 Route::post('books/create','BookController@postCreate');
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+
+Route::get('/practice', function() {
+    $random = new Random();
+    return $random->getRandomString(8);
+    $data = Array('foo' => 'bar');
+    Debugbar::info($data);
+    Debugbar::error('Error!');
+    Debugbar::warning('Watch out…');
+    Debugbar::addMessage('Another message', 'mylabel');
+
+    return 'Practice';
+
+});
+
+
+
+
+/* Catch all*/
+Route::controller('/books','BookController');

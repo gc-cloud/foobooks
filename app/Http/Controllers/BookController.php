@@ -20,10 +20,11 @@ class BookController extends Controller
     /**
     * Respond to foobooks getShow
     */
-    public function getShow($id)
+    public function getShow($title)
     {
-        return 'Show book: ' . $id;
+        return 'Show book: ' . $title;
     }
+
 
     /**
     * Responde to requests to create books
