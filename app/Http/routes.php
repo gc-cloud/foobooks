@@ -23,7 +23,10 @@ Route::get('books/create','BookController@getCreate');
 
 Route::post('books/create','BookController@postCreate');
 
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+/* Show logs only in local environment */
+if(App::environment('local')) {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+};
 
 
 Route::get('/practice', function() {

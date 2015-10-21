@@ -1,47 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('title')
+    Welcome
+@stop
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@section('head')
+    <link href="/css/books/show.css" type='text/css' rel='stylesheet'>
+@stop
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+@section('content')
+        <h1>Welcome to Foobooks</h1>
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+        {!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}
+        {!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}
+        {!! HTML::link('http://foobooks.localhost/books/create', 'Books Create')!!}
+        {!! HTML::link('http://foobooks.localhost/logs', 'Logs')!!}
+@stop
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">FooBooks App</div>
-                <p> Track and manage your collection of books!</p>.
-                {!!HTML::link('http://test.com')!!}
-            </div>
-        </div>
-    </body>
-</html>
+@section('body')
+    <script src="/js/books/show.js"></script>
+@stop

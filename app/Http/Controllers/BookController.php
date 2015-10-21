@@ -14,7 +14,8 @@ class BookController extends Controller
     */
     public function getIndex()
     {
-        return view('books.index');
+
+        return view("books.index");
         //return ' Here are all the books';
     }
 
@@ -47,9 +48,15 @@ class BookController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-        public function postCreate()
+        public function postCreate(Request $request)
         {
-              return 'Process the creation of  a new book: '.$_POST["title"];
+          // Validate the request data
+          $this->validate($request, [
+              'title' => 'required|min:5',
+          ]);
+
+          $title = $request->input('title');
+          return 'Process adding new book: '.$title;
         }
 
 

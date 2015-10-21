@@ -6,15 +6,27 @@
 @stop
 
 @section('head')
-    <link href="/css/books/show.css" type='text/css' rel='stylesheet'>
+    {{-- <link href="/css/books/show.css" type='text/css' rel='stylesheet'> --}}
 @stop
 
 @section('content')
+    {{-- Display validations errors  --}}
+    @if(count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 
-  <p> Start  the creation of  a new book</p>
+
+
   {!! Form::open(array('url' => 'books/create')) !!}
+  <p class="text-primary"> Start  the creation of  a new book</p>
+
+      {{-- {!! method_field('PUT') !!} --}}
       {!!Form::text('title')!!}
-      {!!Form::submit('Submit!')!!}
+      {!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
   {!! Form::close() !!}
 
 @stop
