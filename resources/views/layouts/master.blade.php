@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/foobooks.css" type='text/css'>
+
     {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
     @yield('head')
 
@@ -21,20 +22,19 @@
 <body>
 
     <header>
-
-      <a href="/">
+      <a href="/" class="logo">
         <img src="http://making-the-internet.s3.amazonaws.com/laravel-foobooks-logo@2x.png" style="width:300px" alt="Foobooks Logo">
       </a>
-
-        <nav class="navbar navbar-default">
-          <ul class="nav navbar-nav">
-           <li>{!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}</li>
-           <li>{!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}</li>
-           <li>{!! HTML::link('http://foobooks.localhost/books/create', 'Books Create')!!}</li>
-           <li>{!! HTML::link('http://foobooks.localhost/logs', 'Logs')!!}</li>
-          </ul>
-      </nav>
     </header>
+
+    <nav class="navbar navbar-default">
+      <ul class="nav navbar-nav">
+       <li>{!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}</li>
+       <li>{!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}</li>
+       <li>{!! HTML::link('http://foobooks.localhost/books/create', 'Books Create')!!}</li>
+       <li>{!! HTML::link('http://foobooks.localhost/logs', 'Logs')!!}</li>
+      </ul>
+    </nav>
 
     <section>
       <div class="container jumbotron">

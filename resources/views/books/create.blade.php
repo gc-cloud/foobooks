@@ -10,6 +10,8 @@
 @stop
 
 @section('content')
+
+  <h1> Add a new book </h1>
     {{-- Display validations errors  --}}
     @if(count($errors) > 0)
         <ul>
@@ -19,11 +21,7 @@
         </ul>
     @endif
 
-
-
   {!! Form::open(array('url' => 'books/create')) !!}
-  <p class="text-primary"> Start  the creation of  a new book</p>
-
       {{-- {!! method_field('PUT') !!} --}}
       {!!Form::text('title')!!}
       {!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
