@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-        <h1>Welcome to Foobooks</h1>
+        <h1>Welcome to Foobooks 2!</h1>
 
         {!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}
         {!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}
