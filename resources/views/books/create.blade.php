@@ -23,8 +23,19 @@
 
   {!! Form::open(array('url' => 'books/create')) !!}
       {{-- {!! method_field('PUT') !!} --}}
-      {!!Form::text('title')!!}
-      {!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
+      <fieldset>
+        {!!Form::label('Title:')!!}<br>
+        {!!Form::text('title')!!}<br>
+        {!!Form::label('Author:')!!}<br>
+        {!!Form::text('author')!!}<br>
+        {!!Form::label('Published:')!!}<br>
+        {!!Form::text('published')!!}<br>
+        {!!Form::label('Cover:')!!}<br>
+        {!!Form::text('cover')!!}<br>
+        {!!Form::label('Purchase Link:')!!}<br>
+        {!!Form::text('purchase_link')!!}<br>
+        {!! Form::submit('Add Book', array('class' => 'btn btn-primary')) !!}
+      </fieldset>
   {!! Form::close() !!}
 
 @stop
