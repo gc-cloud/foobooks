@@ -74,10 +74,17 @@ class BookController extends Controller
     /**
     * Responde to requests to create books
     */
-    public function getCreate()
+    public function getCreate(Request $request)
     {
-        return view('books.create');
+      /* Provide list of valid authors*/
+      $authors = \App\Author::orderby('last_name','ASC')->get();
+      $authors_for_dropdown = [];
+      foreach($authors as $author) {
+          $authors_for_dropdown[$author->id] = $author->last_name.', '.$author->first_name;
+      }
+        return view('books.create', compact('book','authors_for_dropdown'));
     }
+
 
 
     /**
@@ -90,7 +97,6 @@ class BookController extends Controller
       // Validate the request data
       $this->validate($request, [
           'title' => 'required|min:5',
-          'author' => 'required|min:5',
           'cover' => 'required|url',
           'purchase_link' => 'required|min:5',
       ]);
@@ -100,9 +106,10 @@ class BookController extends Controller
 
       # Set the parameters
       # Note how each parameter corresponds to a field in the table
-      # TO-do explore masa assignments to avoid verbose code
+      # Todo : read about mass assignments to avoid verbose code
       $book->title = $request->title;
-      $book->author = $request->author;
+      // $book->author = $request->author;
+      $book->author_id = $request->author;
       $book->published = $request->published;
       $book->cover = $request->cover;
       $book->purchase_link = $request->purchase_link;
@@ -123,13 +130,9 @@ class BookController extends Controller
 
       // fetch all books
       $books = \App\Book::all();
-      dump($books);
-      //return redirect('\books');
       return view("books.index", compact('books'));
 
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -141,7 +144,6 @@ class BookController extends Controller
     {
         //
     }
-
 
     /**
      * Show the form for editing the specified resource.

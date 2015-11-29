@@ -18,23 +18,27 @@
   {!! Form::open(array('url' => 'books/create')) !!}
         <div class='form-group'>
           {!!Form::label('Title:')!!}<br>
-          {!!Form::text('title','Green Eggs & Ham')!!}<br>
+          {!!Form::text('title')!!}<br>
         </div>
         <div class='form-group'>
           {!!Form::label('Author:')!!}<br>
-          {!!Form::text('author', 'Dr. Seuss')!!}<br>
+          <select name='author' id='author'>
+            @foreach($authors_for_dropdown as $author_id => $author_name)
+               <option value='{{ $author_id }}'> {{ $author_name }} </option>
+           @endforeach
+          </select>
         </div>
         <div class='form-group'>
           {!!Form::label('Cover (URL):')!!}<br>
-          {!!Form::text('cover','http://prodimage.images-bn.com/pimages/9780394800165_p0_v4_s118x184.jpg')!!}<br>
+          {!!Form::text('cover','http://')!!}<br>
         </div>
         <div class='form-group'>
           {!!Form::label('Published (YYYY):')!!}<br>
-          {!!Form::text('published','1960')!!}<br>
+          {!!Form::text('published')!!}<br>
         </div>
         <div class='form-group'>
           {!!Form::label('Purchase Link:')!!}<br>
-          {!!Form::text('purchase_link','http://www.barnesandnoble.com/w/green-eggs-and-ham-dr-seuss/1100170349?ean=9780394800165')!!}<br>
+          {!!Form::text('purchase_link','http://')!!}<br>
         </div>
         {!! Form::submit('Add Book', array('class' => 'btn btn-primary')) !!}
   {!! Form::close() !!}
