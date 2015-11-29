@@ -10,15 +10,54 @@ use App\Book;
 class BookController extends Controller
 {
 
+    public function __construct() {
+        # Put anything here that should happen before any of the other actions
+    }
+
     /**
-    * Respond from requests to get books
+    * Respond from requests to GET books
     */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
       // USE our ORM book model to retrieve all the books, pass to view
-      $books = \App\Book::all();
+      $books = \App\Book::orderBy('id','DESC')->get();
       return view("books.index", compact('books'));
     }
+
+    /**
+    * Responds to requests to GET /books/edit/{$id}
+    */
+    public function getEdit($id = null) {
+        $book = \App\Book::find($id);
+        if(is_null($book)) {
+            \Session::flash('flash_message','Book not found.');
+            return redirect('\books');
+        }
+
+        $authors = \App\Author::orderby('last_name','ASC')->get();
+        $authors_for_dropdown = [];
+        foreach($authors as $author) {
+            $authors_for_dropdown[$author->id] = $author->last_name.', '.$author->first_name;
+        }
+        return view('books.edit')->with(['book'=>$book, 'authors_for_dropdown' => $authors_for_dropdown]);
+    }
+
+
+    /**
+        * Responds to requests to POST /books/edit
+        */
+        public function postEdit(Request $request) {
+            // Validation
+            $book = \App\Book::find($request->id);
+            $book->title = $request->title;
+            $book->author_id = $request->author;
+            $book->cover = $request->cover;
+            $book->published = $request->published;
+            $book->purchase_link = $request->purchase_link;
+            $book->save();
+            \Session::flash('flash_message','Your book was updated.');
+            return redirect('/books/edit/'.$request->id);
+        }
 
 
 

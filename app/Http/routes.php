@@ -11,10 +11,32 @@
 |
 */
 
+# Reminder: 5 Route methods are: get, post, put, delete, or all
+
 /* Authorization Routes
 -----------------------*/
 
-
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
+# Process logout
+Route::get('/logout', 'Auth\AuthController@getLogout');
+# Show registration form
+Route::get('/register', 'Auth\AuthController@getRegister');
+# Process registration form
+Route::post('/register', 'Auth\AuthController@postRegister');
+Route::get('/confirm-login-worked', function() {
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+    if($user) {
+        echo 'You are logged in.';
+        dump($user->toArray());
+    } else {
+        echo 'You are not logged in.';
+    }
+    return;
+});
 
 
 /* Books Routes
@@ -25,13 +47,12 @@ Route::get('/books','BookController@getIndex');
 
 Route::get('/books/show/{title?}','BookController@getShow');
 
-Route::get('books/create','BookController@getCreate');
-
-Route::post('books/create','BookController@postCreate');
-
-Route::get('/books/edit/{id?}', 'BookController@getEdit');
-
-Route::post('/books/edit', 'BookController@postEdit');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/books/create', 'BookController@getCreate');
+    Route::post('/books/create', 'BookController@postCreate');
+    Route::get('/books/edit/{id?}', 'BookController@getEdit');
+    Route::post('/books/edit', 'BookController@postEdit');
+});
 
 
 /* Route to show logs in local environment

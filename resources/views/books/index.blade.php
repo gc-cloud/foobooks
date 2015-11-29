@@ -1,29 +1,21 @@
 @extends('layouts.master')
 
-
 @section('title')
-    Show book
-@stop
-
-@section('head')
-    <link href="/css/books/show.css" type='text/css' rel='stylesheet'>
+    All Books
 @stop
 
 @section('content')
 
-        <h1>  Index: Here are all the books</h1>
-        <?php
-        if(!$books->isEmpty()) {
+    <h1>All Books</h1>
 
-          // Output the books
-          foreach($books as $book) {
-              echo $book->title.'<br>';
-          }
-        }
-        else {
-          echo 'No books found';
-        }
-        ?>
+    @foreach($books as $book)
+        <div>
+            <h2>{{ $book->title }}</h2>
+            <a href='/books/edit/{{$book->id}}'>Edit</a><br>
+            <img src='{{ $book->cover }}'>
+        </div>
+    @endforeach
+
 @stop
 
 @section('body')

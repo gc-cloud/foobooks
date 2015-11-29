@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Show book
+    Create book
 @stop
 
 @section('head')
@@ -12,30 +12,31 @@
 @section('content')
 
   <h1> Add a new book </h1>
-    {{-- Display validations errors  --}}
-    @if(count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+
+  @include('errors')
 
   {!! Form::open(array('url' => 'books/create')) !!}
-      {{-- {!! method_field('PUT') !!} --}}
-      <fieldset>
-        {!!Form::label('Title:')!!}<br>
-        {!!Form::text('title')!!}<br>
-        {!!Form::label('Author:')!!}<br>
-        {!!Form::text('author')!!}<br>
-        {!!Form::label('Published:')!!}<br>
-        {!!Form::text('published')!!}<br>
-        {!!Form::label('Cover:')!!}<br>
-        {!!Form::text('cover')!!}<br>
-        {!!Form::label('Purchase Link:')!!}<br>
-        {!!Form::text('purchase_link')!!}<br>
+        <div class='form-group'>
+          {!!Form::label('Title:')!!}<br>
+          {!!Form::text('title','Green Eggs & Ham')!!}<br>
+        </div>
+        <div class='form-group'>
+          {!!Form::label('Author:')!!}<br>
+          {!!Form::text('author', 'Dr. Seuss')!!}<br>
+        </div>
+        <div class='form-group'>
+          {!!Form::label('Cover (URL):')!!}<br>
+          {!!Form::text('cover','http://prodimage.images-bn.com/pimages/9780394800165_p0_v4_s118x184.jpg')!!}<br>
+        </div>
+        <div class='form-group'>
+          {!!Form::label('Published (YYYY):')!!}<br>
+          {!!Form::text('published','1960')!!}<br>
+        </div>
+        <div class='form-group'>
+          {!!Form::label('Purchase Link:')!!}<br>
+          {!!Form::text('purchase_link','http://www.barnesandnoble.com/w/green-eggs-and-ham-dr-seuss/1100170349?ean=9780394800165')!!}<br>
+        </div>
         {!! Form::submit('Add Book', array('class' => 'btn btn-primary')) !!}
-      </fieldset>
   {!! Form::close() !!}
 
 @stop

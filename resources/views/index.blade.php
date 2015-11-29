@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Show book
+    Welcome
 @stop
 
 @section('head')
@@ -10,11 +10,7 @@
 @stop
 
 @section('content')
-    @if($title)
-        <h1>Show book: {{ $title }}</h1>
-    @else
-        <h1>No book specified</h1>
-    @endif
+        <h1>Welcome to Foobooks!</h1>
 @stop
 
 @section('body')

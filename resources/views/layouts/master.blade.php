@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>
         {{-- Yield the title if it exists, otherwise default to 'Foobooks' --}}
@@ -17,9 +18,14 @@
 
     {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
     @yield('head')
-
 </head>
+
 <body>
+    @if(\Session::has('flash_message'))
+       <div class='flash_message'>
+           {{ \Session::get('flash_message') }}
+       </div>
+    @endif
 
     <header>
       <a href="/" class="logo">
@@ -29,10 +35,17 @@
 
     <nav class="navbar navbar-default">
       <ul class="nav navbar-nav">
-       <li>{!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}</li>
-       <li>{!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}</li>
-       <li>{!! HTML::link('http://foobooks.localhost/books/create', 'Books Create')!!}</li>
-       <li>{!! HTML::link('http://foobooks.localhost/logs', 'Logs')!!}</li>
+            <li><a href='/'>Home</a></li>
+            <li>{!! HTML::link('http://foobooks.localhost/books/show/', 'Show Books')!!}</li>
+            <li>{!! HTML::link('http://foobooks.localhost/books', 'Books Index')!!}</li>
+        @if(Auth::check())
+            <li>{!! HTML::link('http://foobooks.localhost/books/create', 'Add a Book')!!}</li>
+            <li><a href='/logout'>Log out</a></li>
+         @else
+            <li><a href='/login'>Log in</a></li>
+            <li><a href='/register'>Register</a></li>
+        @endif
+          <li>{!! HTML::link('http://foobooks.localhost/logs', 'Logs')!!}</li>
       </ul>
     </nav>
 
