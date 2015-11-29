@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Authorization Routes
+-----------------------*/
 
-if(App::environment('local')){
-  Route::match(['get','post'],'logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-};
+
+
+
+/* Books Routes
+------------------------*/
+Route::get('/', 'BookController@getIndex');
 
 Route::get('/books','BookController@getIndex');
 
@@ -27,17 +29,26 @@ Route::get('books/create','BookController@getCreate');
 
 Route::post('books/create','BookController@postCreate');
 
-/* Show logs only in local environment */
-// if(App::environment('local')) {
-//     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-// };
+Route::get('/books/edit/{id?}', 'BookController@getEdit');
+
+Route::post('/books/edit', 'BookController@postEdit');
 
 
+/* Route to show logs in local environment
+------------------------------------------*/
+if(App::environment('local')){
+  Route::match(['get','post'],'logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+};
 
-/* Catch all*/
-Route::controller('/books','BookController');
 
-/* Debug DB */
+/* practice
+-----------------------------------------*/
+
+Route::controller('/practice','PracticeController');
+
+
+/* Debug DB
+-----------------------------------------*/
 Route::get('/debug', function() {
 
     echo '<pre>';
@@ -72,3 +83,7 @@ Route::get('/debug', function() {
     echo '</pre>';
 
 });
+
+/* Catch all
+-----------------------------------------*/
+Route::controller('/books','BookController');
