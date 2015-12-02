@@ -12,6 +12,6 @@ class Book extends Model
     }
     /* Book belongs to many Tags */
     public function tags() {
-     return $this->belongsToMany('\App\Tag')->withTimestamps();;
+     return $this->belongsToMany('\App\Tag')->withTimestamps();
  }
 }

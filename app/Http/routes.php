@@ -26,6 +26,7 @@ Route::get('/logout', 'Auth\AuthController@getLogout');
 Route::get('/register', 'Auth\AuthController@getRegister');
 # Process registration form
 Route::post('/register', 'Auth\AuthController@postRegister');
+
 Route::get('/confirm-login-worked', function() {
     # You may access the authenticated user via the Auth facade
     $user = Auth::user();

@@ -30,13 +30,14 @@ class PracticeController extends Controller
 */
  function getExample11() {
      $books = \App\Book::with('tags')->get();
-     dump($books->toArray());
+
      foreach($books as $book) {
          echo '<br>'.$book->title.' is tagged with: ';
          foreach($book->tags as $tag) {
              echo $tag->name.' ';
          }
      }
+     dump($books->toArray());
 }
  /**
 * Get a single book with its tag(s)
@@ -56,25 +57,29 @@ class PracticeController extends Controller
 * Get all the books with their authors
 */
  function getExample9() {
-     # Eager load the authors with the books
-     $books = \App\Book::with('author')->get();
-     dump($books->toArray());
-     foreach($books as $book) {
-       $author = \App\Author::find($book->author_id);
-       echo $author->first_name.' '.$author->last_name.' wrote '.$book->title.'<br>';
-     }
-     return 'Example 9: Retrieved all DB books and related authors.';
+    # Eager load the authors with the books
+    $books = \App\Book::with('author')->get();
+    foreach($books as $book) {
+        echo $book->author->first_name.' '.$book->author->last_name.' wrote '.$book->title.'<br>';
+    }
+    dump($books->toArray());
+    return 'Example 9: Retrieved all DB books and related authors.';
 }
  /**
 * Get a single book with its author
 */
  function getExample8() {
      $book = \App\Book::first();
+     # Get the author from this book using the "author" dynamic property
+     # "author" corresponds to the the relationship method defined in the Book model
+     $author = $book->author;
+
+     # Output
+     echo $book->title.' was written by '.$author->first_name.' '.$author->last_name;
      dump($book->toArray());
-     $author = \App\Author::find($book->author_id);
      dump($author->toArray());
-     echo $book->title.' was written by '.$author->first_name.' '.$author->last_name.'</br>';
      return 'Example 8: Retrieved first DB record of single book with author.';
+
 }
  /**
 * Associate a new author with a new book
@@ -87,13 +92,13 @@ class PracticeController extends Controller
      $author->birth_year = '1965';
      $author->save();
      dump($author->toArray());
+
      $book = new \App\Book;
      $book->title = "Harry Potter and the Philosopher's Stone";
      $book->published = 1997;
      $book->cover = 'http://prodimage.images-bn.com/pimages/9781582348254_p0_v1_s118x184.jpg';
      $book->purchase_link = 'http://www.barnesandnoble.com/w/harrius-potter-et-philosophi-lapis-j-k-rowling/1102662272?ean=9781582348254';
      $book->author()->associate($author); # <--- Associate the author with this book
-     //$book->author_id = $author->id;
      $book->save();
      dump($book->toArray());
      return 'Example 7: Added new book.';
@@ -103,11 +108,9 @@ class PracticeController extends Controller
 */
  function getExample6() {
      // Query Responsibility
-   $books = \App\Book::orderBy('id','DESC')->get();
+     $books = \App\Book::orderBy('id','DESC')->get();
      $first = $books->first();
      $last  = $books->last();
-     //$first = \App\Book::orderBy('id','ASC')->first();
-     //$last = \App\Book::orderBy('id','DESC')->first();
      dump($books);
      dump($first);
      dump($last);

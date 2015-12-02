@@ -8,6 +8,6 @@ class Tag extends Model
 {
   /* Tag belongs to many books */
   public function books() {
-      return $this->belongsToMany('\App\Book')->withTimestamps();;
+      return $this->belongsToMany('\App\Book')->withTimestamps();
   }
 }
