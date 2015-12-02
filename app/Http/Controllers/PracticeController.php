@@ -123,18 +123,18 @@ class PracticeController extends Controller
 * Delete example
 */
  function getExample5() {
-     $book = new \App\Book();
-     $harry_potter = $book->find(8);
-     $harry_potter->delete();
-     return 'Example 5:delete book';
+    $book = new \App\Book();
+    $harry_potter = $book->find(7);
+    $harry_potter->delete();
+    return 'Example 5:delete book';
  }
  /**
-* Update example
+* Add  example
 */
  function getExample4() {
      $book = new \App\Book();
-     $book->title = 'Harry Potter';
-     $book->author = 'J.k Rowling';
+     $book->title = 'Harry Potter- Added';
+     $book->author_id = 2;
      $book->save();
      return 'Example 4: save book';
  }
@@ -168,7 +168,7 @@ class PracticeController extends Controller
          'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
          'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
          'title' => 'The Great Gatsby',
-         'author' => 'F. Scott Fitzgerald',
+         'author_id' => 1,
          'published' => 1925,
          'cover' => 'http://img2.imagesbn.com/p/9780743273565_p0_v4_s114x166.JPG',
          'purchase_link' => 'http://www.barnesandnoble.com/w/the-great-gatsby-francis-scott-fitzgerald/1116668135?ean=9780743273565',
